@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Syntax checks
+        run: |
+          node --check index.js
+          node --check lib/store.js
+          node --check lib/update.js
+          node --check lib/catalog.js
+          node --check client.js
+      - name: Tests
+        run: |
+          node test/store.test.mjs
+          node test/http.test.mjs
+          node test/client.test.mjs
+          node test/update.test.mjs
+          node test/catalog.test.mjs

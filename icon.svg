@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Workspace Atlas">
+  <rect width="64" height="64" rx="14" fill="#1F6FEB"/>
+  <path d="M27 32h8M35 32V21h7M35 32v11h7" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="14" y="25" width="13" height="14" rx="3" fill="#FFFFFF"/>
+  <rect x="42" y="14" width="13" height="14" rx="3" fill="#FFFFFF"/>
+  <rect x="42" y="36" width="13" height="14" rx="3" fill="#FFFFFF"/>
+  <circle cx="20.5" cy="32" r="2" fill="#1F6FEB"/>
+  <circle cx="48.5" cy="21" r="2" fill="#1F6FEB"/>
+  <circle cx="48.5" cy="43" r="2" fill="#1F6FEB"/>
+</svg>
