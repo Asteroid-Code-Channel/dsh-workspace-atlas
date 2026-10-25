@@ -40,6 +40,14 @@ Workspace Atlas adds a full-page panel to the DSH Web UI for browsing registered
 - Global skill management at `$DSH_HOME/skills`.
 - Chinese and English locale, DSH theme tokens, no private Harness UI imports.
 
+## Screenshots
+
+![Workspace list](assets/screenshots/01-workspace-list.png)
+
+![Workspace tree](assets/screenshots/02-workspace-tree.png)
+
+![Skill catalog](assets/screenshots/03-skill-catalog.png)
+
 ## Skill catalog
 
 The header's **Skill catalog / 技能目录** button opens a separate catalog view:

@@ -1,9 +1,9 @@
 {
   "name": "dsh-workspace-atlas",
   "version": "0.2.0",
-  "description": "Workspace Atlas — browse workspaces as a list or left-to-right tree, and edit AGENTS.md / SKILL.md files from the DSH desktop UI.",
+  "description": "Workspace Atlas — workspace tree, AGENTS editor, multi-skill manager, and a four-source skill catalog for DeepSeek Harness / DSH NEXT.",
   "license": "MIT",
-  "author": "Workspace Atlas contributors",
+  "author": "Asteroid-Code-Channel",
   "repository": {
     "type": "git",
     "url": "https://github.com/Asteroid-Code-Channel/dsh-workspace-atlas.git"
@@ -35,9 +35,11 @@
     "deepseek-harness",
     "dsh",
     "dsh-plugin",
-    "agents",
+    "agents-md",
     "skills",
-    "workspace"
+    "skill-catalog",
+    "workspace",
+    "workspace-tree"
   ],
   "engines": {
     "node": ">=22.19.0"
