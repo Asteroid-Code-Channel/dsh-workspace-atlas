@@ -103,6 +103,7 @@ The create form collects all six fields plus the Markdown body, then writes a ca
 The edit page has a file tab for everything outside the root `SKILL.md`:
 
 - create nested files and folders under the skill directory
+- rename the skill parent folder; all child files move with it
 - edit and save text files such as `references/guide.md` or `scripts/run.py`
 - delete files or folders
 - path validation keeps every operation inside that skill directory
@@ -197,6 +198,7 @@ The Host half registers these same-origin endpoints:
 | `POST` | `/api/dsh-agents-manager/skills/create` | Create a native skill |
 | `POST` | `/api/dsh-agents-manager/skills/read` | Read parsed skill fields and body |
 | `POST` | `/api/dsh-agents-manager/skills/save` | Save structured fields and body |
+| `POST` | `/api/dsh-agents-manager/skills/rename` | Rename a skill parent folder |
 | `POST` | `/api/dsh-agents-manager/skills/files` | List a skill directory |
 | `POST` | `/api/dsh-agents-manager/skills/file/read` | Read a skill file |
 | `POST` | `/api/dsh-agents-manager/skills/file/save` | Save a skill file |

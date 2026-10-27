@@ -246,8 +246,16 @@ const files = await invoke('/api/dsh-agents-manager/skills/files', {
 });
 assert.equal(files.status, 200);
 assert(files.payload.data.entries.some((entry) => entry.relativePath === 'references/guide.md'));
+const renamedRoute = await invoke('/api/dsh-agents-manager/skills/rename', {
+  body: { workspaceId: 'ws-1', name: 'structured-skill', newName: 'structured-renamed' },
+});
+assert.equal(renamedRoute.status, 200);
+assert.equal(renamedRoute.payload.data.renamed, true);
+assert.equal((await invoke('/api/dsh-agents-manager/skills/read', {
+  body: { workspaceId: 'ws-1', name: 'structured-renamed' },
+})).payload.data.fields.name, 'structured-renamed');
 await invoke('/api/dsh-agents-manager/skills/delete', {
-  body: { workspaceId: 'ws-1', name: 'structured-skill' },
+  body: { workspaceId: 'ws-1', name: 'structured-renamed' },
 });
 
 if (previousHome === undefined) delete process.env.DSH_HOME;

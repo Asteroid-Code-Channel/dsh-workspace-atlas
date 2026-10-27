@@ -68,6 +68,11 @@ window.__ModuleLoader__.load({
         fileDeleted: '已删除 {path}',
         folderCreated: '已创建目录 {path}',
         confirmEntryDelete: '确定删除 {path}？文件夹会连同内容一起删除。',
+        parentFolder: '父文件夹',
+        parentFolderHint: '新的文件夹名称',
+        renameFolder: '重命名文件夹',
+        confirmRenameFolder: '确定将父文件夹重命名为 {name}？子文件会一起移动。',
+        folderRenamed: '父文件夹已重命名为 {name}',
         skillNameSpecHint: '仅小写字母、数字和连字符；不能以连字符开头或结尾，不能连续两个连字符。',
         skillNameEditHint: '修改名称并保存时，技能父文件夹会同步重命名，子文件一起移动；新名称需符合规范。已有非规范名称可保持不变。',
         skillNameHint: '仅字母、数字、点、下划线和连字符。',
@@ -242,6 +247,11 @@ window.__ModuleLoader__.load({
         fileDeleted: 'Deleted {path}',
         folderCreated: 'Created folder {path}',
         confirmEntryDelete: 'Delete {path}? A folder is removed with all its contents.',
+        parentFolder: 'Parent folder',
+        parentFolderHint: 'New folder name',
+        renameFolder: 'Rename folder',
+        confirmRenameFolder: 'Rename the parent folder to {name}? Child files move with it.',
+        folderRenamed: 'Renamed parent folder to {name}',
         skillNameSpecHint: 'Lowercase letters, numbers, and single hyphens only; no leading/trailing or consecutive hyphens.',
         skillNameEditHint: 'Saving a new name renames the skill parent folder and moves all child files. The new name must follow the spec; existing non-spec names may be kept.',
         skillNameHint: 'Letters, numbers, dots, underscores, and hyphens only.',
@@ -1686,6 +1696,17 @@ window.__ModuleLoader__.load({
         border: 1px dashed var(--dsw-alias-border-l2);
         border-radius: 7px;
       }
+      .dam-skill-folder-rename {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px;
+        border: 1px solid var(--dsw-alias-border-l1);
+        border-radius: 7px;
+        background: var(--dsw-alias-bg-layer-2);
+      }
+      .dam-skill-folder-label { flex: none; color: var(--dsw-alias-label-secondary); font-size: 10px; }
+      .dam-skill-folder-rename .dam-input { flex: 1; min-width: 0; }
       .dam-skill-file-create .dam-input { flex: 1; min-width: 0; }
       .dam-skill-file-list {
         max-height: 190px;
@@ -2143,6 +2164,7 @@ window.__ModuleLoader__.load({
       const [fileDoc, setFileDoc] = useState(null);
       const [fileDraft, setFileDraft] = useState('');
       const [entryPath, setEntryPath] = useState('');
+      const [folderName, setFolderName] = useState('');
       const [name, setName] = useState('');
       const [url, setUrl] = useState('');
       const [library, setLibrary] = useState(null);
@@ -2194,6 +2216,7 @@ window.__ModuleLoader__.load({
         setFileDoc(null);
         setFileDraft('');
         setEntryPath('');
+        setFolderName('');
         setError('');
       }
 
@@ -2233,6 +2256,7 @@ window.__ModuleLoader__.load({
         const legacy = skill.legacy === true;
         resetEditor();
         setSelected({ ...skill, legacy });
+        setFolderName(skill.skillName || '');
         setView('edit');
         setLoading(true);
         try {
@@ -2264,13 +2288,13 @@ window.__ModuleLoader__.load({
         }
       }
 
-      async function loadFiles(showLoading = true) {
+      async function loadFiles(showLoading = true, skillName = selected.skillName) {
         if (showLoading) setFilesLoading(true);
         setError('');
         try {
           const result = await request('/skills/files', {
             method: 'POST',
-            body: JSON.stringify({ workspaceId: workspace.id, name: selected.skillName }),
+            body: JSON.stringify({ workspaceId: workspace.id, name: skillName }),
           });
           setFiles(result);
           return result;
@@ -2411,6 +2435,39 @@ window.__ModuleLoader__.load({
         }
       }
 
+      async function renameFolder() {
+        if (!selected || selected.legacy) return;
+        const nextName = folderName.trim();
+        if (!nextName || nextName === selected.skillName) return;
+        if (!(await askConfirm(tr(t, 'confirmRenameFolder', { name: nextName }), { danger: false }))) return;
+        setBusy(true);
+        setError('');
+        try {
+          const result = await request('/skills/rename', {
+            method: 'POST',
+            body: JSON.stringify({
+              workspaceId: workspace.id,
+              name: selected.skillName,
+              newName: nextName,
+            }),
+          });
+          setSelected((previous) => previous ? { ...previous, skillName: result.skillName, path: result.path } : previous);
+          setDoc((previous) => previous ? { ...previous, ...result } : previous);
+          setFields((previous) => ({ ...previous, name: result.skillName }));
+          setOriginal((previous) => previous ? { ...previous, fields: { ...previous.fields, name: result.skillName } } : previous);
+          setFolderName(result.skillName);
+          setFileDoc(null);
+          setFileDraft('');
+          setNotice({ kind: 'success', text: tr(t, 'folderRenamed', { name: result.skillName }) });
+          await refreshAll();
+          await loadFiles(false, result.skillName);
+        } catch (caught) {
+          setError(errorText(t, caught));
+        } finally {
+          setBusy(false);
+        }
+      }
+
       async function saveSelected() {
         if (!selected || !doc) return;
         setBusy(true);
@@ -2450,6 +2507,7 @@ window.__ModuleLoader__.load({
             setOriginal({ fields: nextFields, body: result.body || '' });
             if (result.skillName) {
               setSelected((previous) => previous ? { ...previous, skillName: result.skillName, path: result.path || previous.path } : previous);
+              setFolderName(result.skillName);
             }
             setNotice({ kind: 'success', text: tr(t, 'savedNotice', { path: result.path }) });
           }
@@ -2772,6 +2830,20 @@ window.__ModuleLoader__.load({
         const entries = files?.entries || [];
         return h('div', { className: 'dam-skill-files' },
           h('div', { className: 'dam-skill-hint' }, tr(t, 'skillFilesHint')),
+          h('div', { className: 'dam-skill-folder-rename' },
+            h('span', { className: 'dam-skill-folder-label' }, tr(t, 'parentFolder')),
+            h('input', {
+              className: 'dam-input',
+              value: folderName,
+              placeholder: tr(t, 'parentFolderHint'),
+              onChange: (event) => setFolderName(event.target.value),
+            }),
+            h('button', {
+              type: 'button',
+              className: 'dam-btn',
+              onClick: renameFolder,
+              disabled: busy || !folderName.trim() || folderName.trim() === selected.skillName,
+            }, tr(t, 'renameFolder'))),
           h('div', { className: 'dam-skill-file-create' },
             h('input', {
               className: 'dam-input',

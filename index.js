@@ -74,6 +74,10 @@ export function apply(ctx, config = {}) {
     const body = await readBody(req);
     return store.saveSkill(body.workspaceId, body.name, body);
   }));
+  route('skills/rename', (req, res) => handle(req, res, true, async () => {
+    const body = await readBody(req);
+    return store.renameSkillFolder(body.workspaceId, body.name, body.newName);
+  }));
   route('skills/files', (req, res) => handle(req, res, true, async () => {
     const body = await readBody(req);
     return store.listSkillFiles(body.workspaceId, body.name);

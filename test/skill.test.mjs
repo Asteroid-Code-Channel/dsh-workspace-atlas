@@ -115,6 +115,10 @@ assert.equal(renamed.renamed, true);
 assert.equal((await store.readSkill('ws-skill', 'renamed-skill')).fields.name, 'renamed-skill');
 assert.equal((await store.readSkillFile('ws-skill', 'renamed-skill', 'references/moved.md')).content, '# Moved\n');
 assert.equal(await fs.stat(path.join(workspace, '.dsh', 'skills', 'rename-me')).catch(() => null), null);
+const folderRenamed = await store.renameSkillFolder('ws-skill', 'renamed-skill', 'renamed-again');
+assert.equal(folderRenamed.renamed, true);
+assert.equal((await store.readSkill('ws-skill', 'renamed-again')).fields.name, 'renamed-again');
+assert.equal((await store.readSkillFile('ws-skill', 'renamed-again', 'references/moved.md')).content, '# Moved\n');
 
 await store.createSkillFolder('ws-skill', 'pdf-tools', 'references');
 await store.saveSkillFile('ws-skill', 'pdf-tools', 'references/guide.md', '# Guide\n', null);

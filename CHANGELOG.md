@@ -3,6 +3,7 @@
 ## 0.3.2
 
 - Allow editing an existing skill name; saving renames the parent folder and moves all child files.
+- Add an explicit parent-folder rename action in the file tab.
 - Allow saving an existing non-spec skill name without a validation error.
 - Make the skill form hint pale yellow.
 
