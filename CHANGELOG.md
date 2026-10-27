@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0
+
+- Add a structured Agent Skills create form with `name`, `description`, `license`, `compatibility`, `metadata`, `allowed-tools`, and Markdown body.
+- Generate spec-compliant YAML frontmatter automatically; `name` and `description` are required.
+- Add structured editing for existing native skills while preserving the Markdown body and unknown frontmatter fields.
+- Add a skill file manager for nested files and folders, including create, edit, and delete.
+- Validate skill-relative paths and reject symbolic-link traversal.
+
 ## 0.2.1
 
 - Rename the display name to AGENTS & Skills Studio / AGENTS & Skills 工作台.

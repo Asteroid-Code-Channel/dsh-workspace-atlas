@@ -85,6 +85,30 @@ Sources:
 
 Catalog installation downloads every file in the selected skill directory, not only `SKILL.md`. It installs into `$DSH_HOME/skills/<name>` and refuses to overwrite an existing skill.
 
+## Create and edit skills
+
+New skills use the [Agent Skills specification](https://agentskills.io/specification):
+
+| Field | Required | Notes |
+|---|---|---|
+| `name` | yes | Lowercase letters, numbers, and single hyphens; 1-64 characters |
+| `description` | yes | 1-1024 characters; what the skill does and when to use it |
+| `license` | no | License name or a bundled license file |
+| `compatibility` | no | Environment requirements; up to 500 characters |
+| `metadata` | no | String key-value mapping |
+| `allowed-tools` | no | Space-separated pre-approved tools |
+
+The create form collects all six fields plus the Markdown body, then writes a canonical `SKILL.md` with YAML frontmatter. Existing native skills open in the same structured editor.
+
+The edit page has a file tab for everything outside the root `SKILL.md`:
+
+- create nested files and folders under the skill directory
+- edit and save text files such as `references/guide.md` or `scripts/run.py`
+- delete files or folders
+- path validation keeps every operation inside that skill directory
+
+Legacy root `SKILL.md` remains a raw Markdown editor.
+
 ## Install
 
 Requirements:
@@ -171,6 +195,13 @@ The Host half registers these same-origin endpoints:
 | `POST` | `/api/dsh-agents-manager/delete` | Delete + backup |
 | `POST` | `/api/dsh-agents-manager/skills/list` | List native + legacy skills |
 | `POST` | `/api/dsh-agents-manager/skills/create` | Create a native skill |
+| `POST` | `/api/dsh-agents-manager/skills/read` | Read parsed skill fields and body |
+| `POST` | `/api/dsh-agents-manager/skills/save` | Save structured fields and body |
+| `POST` | `/api/dsh-agents-manager/skills/files` | List a skill directory |
+| `POST` | `/api/dsh-agents-manager/skills/file/read` | Read a skill file |
+| `POST` | `/api/dsh-agents-manager/skills/file/save` | Save a skill file |
+| `POST` | `/api/dsh-agents-manager/skills/file/delete` | Delete a skill file or folder |
+| `POST` | `/api/dsh-agents-manager/skills/folder/create` | Create a skill folder |
 | `POST` | `/api/dsh-agents-manager/skills/import` | Import a `SKILL.md` from URL |
 | `POST` | `/api/dsh-agents-manager/skills/delete` | Move a native skill to trash |
 | `GET` | `/api/dsh-agents-manager/skills/library` | List local skill library |
@@ -201,6 +232,7 @@ node --check .\lib\store.js
 node --check .\client.js
 node .\test\store.test.mjs
 node .\test\http.test.mjs
+node .\test\skill.test.mjs
 node .\test\client.test.mjs
 node .\test\update.test.mjs
 node .\test\catalog.test.mjs

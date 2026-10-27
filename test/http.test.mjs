@@ -200,6 +200,56 @@ const skillDeleted = await invoke('/api/dsh-agents-manager/skills/delete', {
 assert.equal(skillDeleted.status, 200);
 assert.equal(skillDeleted.payload.data.deleted, true);
 
+const structured = await invoke('/api/dsh-agents-manager/skills/create', {
+  body: {
+    workspaceId: 'ws-1',
+    name: 'structured-skill',
+    description: 'Structured skill for HTTP tests.',
+    license: 'MIT',
+    compatibility: 'Test environment',
+    metadata: { author: 'test' },
+    allowedTools: 'Read',
+    body: '# Structured\n',
+  },
+});
+assert.equal(structured.status, 200);
+const structuredContent = await fs.readFile(
+  path.join(workspace, '.dsh', 'skills', 'structured-skill', 'SKILL.md'),
+  'utf8',
+);
+assert.match(structuredContent, /^---\nname: structured-skill\n/);
+assert.match(structuredContent, /license: MIT/);
+assert.match(structuredContent, /metadata:\n  author: test/);
+
+const structuredRead = await invoke('/api/dsh-agents-manager/skills/read', {
+  body: { workspaceId: 'ws-1', name: 'structured-skill' },
+});
+assert.equal(structuredRead.status, 200);
+assert.equal(structuredRead.payload.data.fields.description, 'Structured skill for HTTP tests.');
+assert.equal(structuredRead.payload.data.body, '# Structured\n');
+
+const folder = await invoke('/api/dsh-agents-manager/skills/folder/create', {
+  body: { workspaceId: 'ws-1', name: 'structured-skill', relativePath: 'references' },
+});
+assert.equal(folder.status, 200);
+const fileSaved = await invoke('/api/dsh-agents-manager/skills/file/save', {
+  body: {
+    workspaceId: 'ws-1',
+    name: 'structured-skill',
+    relativePath: 'references/guide.md',
+    content: '# Guide\n',
+  },
+});
+assert.equal(fileSaved.status, 200);
+const files = await invoke('/api/dsh-agents-manager/skills/files', {
+  body: { workspaceId: 'ws-1', name: 'structured-skill' },
+});
+assert.equal(files.status, 200);
+assert(files.payload.data.entries.some((entry) => entry.relativePath === 'references/guide.md'));
+await invoke('/api/dsh-agents-manager/skills/delete', {
+  body: { workspaceId: 'ws-1', name: 'structured-skill' },
+});
+
 if (previousHome === undefined) delete process.env.DSH_HOME;
 else process.env.DSH_HOME = previousHome;
 await fs.rm(base, { recursive: true, force: true });

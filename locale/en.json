@@ -1,6 +1,6 @@
 {
   "meta": {
     "title": "AGENTS & Skills Studio",
-    "description": "Edit global and workspace AGENTS.md, manage multiple SKILL.md files, and install skills from Anthropic, OpenAI, Cursor, and Matt Pocock catalogs."
+    "description": "Edit global and workspace AGENTS.md, create spec-compliant SKILL.md files, manage skill subfolders, and install skills from Anthropic, OpenAI, Cursor, and Matt Pocock catalogs."
   }
 }

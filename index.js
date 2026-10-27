@@ -62,7 +62,46 @@ export function apply(ctx, config = {}) {
   }));
   route('skills/create', (req, res) => handle(req, res, true, async () => {
     const body = await readBody(req);
-    return store.createSkill(body.workspaceId, body.name, body.content);
+    return body.description !== undefined || body.fields
+      ? store.createSkill(body.workspaceId, body)
+      : store.createSkill(body.workspaceId, body.name, body.content);
+  }));
+  route('skills/read', (req, res) => handle(req, res, true, async () => {
+    const body = await readBody(req);
+    return store.readSkill(body.workspaceId, body.name);
+  }));
+  route('skills/save', (req, res) => handle(req, res, true, async () => {
+    const body = await readBody(req);
+    return store.saveSkill(body.workspaceId, body.name, body);
+  }));
+  route('skills/files', (req, res) => handle(req, res, true, async () => {
+    const body = await readBody(req);
+    return store.listSkillFiles(body.workspaceId, body.name);
+  }));
+  route('skills/file/read', (req, res) => handle(req, res, true, async () => {
+    const body = await readBody(req);
+    return store.readSkillFile(body.workspaceId, body.name, body.relativePath);
+  }));
+  route('skills/file/save', (req, res) => handle(req, res, true, async () => {
+    const body = await readBody(req);
+    return store.saveSkillFile(
+      body.workspaceId,
+      body.name,
+      body.relativePath,
+      body.content,
+      body.expectedMtimeMs,
+      body.createOnly === true,
+    );
+  }));
+  route('skills/file/delete', (req, res) => handle(req, res, true, async () => {
+    const body = await readBody(req);
+    return store.deleteSkillFile(body.workspaceId, body.name, body.relativePath, {
+      recursive: body.recursive === true,
+    });
+  }));
+  route('skills/folder/create', (req, res) => handle(req, res, true, async () => {
+    const body = await readBody(req);
+    return store.createSkillFolder(body.workspaceId, body.name, body.relativePath);
   }));
   route('skills/import', (req, res) => handle(req, res, true, async () => {
     const body = await readBody(req);

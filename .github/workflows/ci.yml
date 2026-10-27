@@ -16,6 +16,7 @@ jobs:
         run: |
           node --check index.js
           node --check lib/store.js
+          node --check lib/skill.js
           node --check lib/update.js
           node --check lib/catalog.js
           node --check client.js
@@ -23,6 +24,7 @@ jobs:
         run: |
           node test/store.test.mjs
           node test/http.test.mjs
+          node test/skill.test.mjs
           node test/client.test.mjs
           node test/update.test.mjs
           node test/catalog.test.mjs

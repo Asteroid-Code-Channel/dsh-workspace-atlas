@@ -35,7 +35,44 @@ window.__ModuleLoader__.load({
         createSkill: '创建',
         import: '导入',
         importing: '导入中…',
-        skillManagerHint: '项目技能存放在 .dsh/skills/<name>/SKILL.md；根 SKILL.md 作为 legacy 保留。',
+        skillManagerHint: '按 Agent Skills 规范编辑 SKILL.md；项目技能存放在 .dsh/skills/<name>/SKILL.md。',
+        skillFormHint: 'name 和 description 必填；其余字段选填。保存时自动生成 YAML frontmatter。',
+        skillDescription: '描述',
+        skillLicense: '许可证',
+        skillCompatibility: '兼容性',
+        skillMetadata: '元数据',
+        skillAllowedTools: '允许的工具',
+        skillBody: '技能内容',
+        skillBodyHint: 'Markdown 正文。可引用同目录下的 scripts/、references/、assets/ 文件。',
+        skillDescriptionHint: '说明技能做什么、什么时候使用；最多 1024 字符。',
+        skillCompatibilityHint: '环境要求，例如系统依赖、网络访问；最多 500 字符。',
+        skillAllowedToolsHint: '空格分隔的预授权工具，例如 Bash(git:*) Read。',
+        metadataHint: '自由键值对，例如 author、version。',
+        metadataKey: '键',
+        metadataValue: '值',
+        addMetadata: '添加元数据',
+        remove: '移除',
+        skillNameFixed: '名称由目录名决定，创建后不能在此修改。',
+        skillTabInfo: '技能信息',
+        skillTabFiles: '文件',
+        skillFilesHint: '管理 SKILL.md 之外的脚本、引用和资源。',
+        skillFilesEmpty: '还没有附加文件。',
+        rootSkill: '根 SKILL.md',
+        entryPath: '相对路径',
+        entryPathHint: '例如 references/guide.md 或 scripts/run.py',
+        newSkillFile: '新建文件',
+        newSkillFolder: '新建文件夹',
+        fileContent: '文件内容',
+        binaryFile: '二进制文件不能在此编辑。',
+        fileSaved: '已保存 {path}',
+        fileDeleted: '已删除 {path}',
+        folderCreated: '已创建目录 {path}',
+        confirmEntryDelete: '确定删除 {path}？文件夹会连同内容一起删除。',
+        skillNameSpecHint: '仅小写字母、数字和连字符；不能以连字符开头或结尾，不能连续两个连字符。',
+        skillNameHint: '仅字母、数字、点、下划线和连字符。',
+        skillNameRequired: '请填写 name。',
+        skillDescriptionRequired: '请填写 description。',
+        entryPathRequired: '请填写相对路径。',
         legacySkill: '根 SKILL.md（legacy）',
         nativeSkill: '项目技能',
         noSkills: '尚无项目技能',
@@ -51,7 +88,6 @@ window.__ModuleLoader__.load({
         skillInstalled: '已安装 {name}',
         confirmSkillDelete: '确定删除技能 {name}？目录会移动到 DSH 回收目录。',
         confirmLegacyDelete: '确定删除根 SKILL.md？删除前会自动备份。',
-        skillNameHint: '仅字母、数字、点、下划线和连字符。',
         libraryPath: '仓库位置',
         skillCatalog: '技能目录',
         catalogSubtitle: '从公开仓库同步 SKILL 索引，安装到全局技能目录。',
@@ -172,7 +208,44 @@ window.__ModuleLoader__.load({
         createSkill: 'Create',
         import: 'Import',
         importing: 'Importing…',
-        skillManagerHint: 'Project skills live at .dsh/skills/<name>/SKILL.md; a root SKILL.md is kept as legacy.',
+        skillManagerHint: 'Edit SKILL.md using the Agent Skills format; project skills live at .dsh/skills/<name>/SKILL.md.',
+        skillFormHint: 'name and description are required; all other fields are optional. YAML frontmatter is generated on save.',
+        skillDescription: 'Description',
+        skillLicense: 'License',
+        skillCompatibility: 'Compatibility',
+        skillMetadata: 'Metadata',
+        skillAllowedTools: 'Allowed tools',
+        skillBody: 'Skill content',
+        skillBodyHint: 'Markdown body. Reference scripts/, references/, or assets/ in the same directory.',
+        skillDescriptionHint: 'What the skill does and when to use it; up to 1024 characters.',
+        skillCompatibilityHint: 'Environment requirements such as system packages or network access; up to 500 characters.',
+        skillAllowedToolsHint: 'Space-separated pre-approved tools, for example Bash(git:*) Read.',
+        metadataHint: 'Free-form key-value pairs such as author or version.',
+        metadataKey: 'Key',
+        metadataValue: 'Value',
+        addMetadata: 'Add metadata',
+        remove: 'Remove',
+        skillNameFixed: 'The name comes from the directory and cannot be changed here.',
+        skillTabInfo: 'Skill info',
+        skillTabFiles: 'Files',
+        skillFilesHint: 'Manage scripts, references, and assets outside SKILL.md.',
+        skillFilesEmpty: 'No additional files yet.',
+        rootSkill: 'Root SKILL.md',
+        entryPath: 'Relative path',
+        entryPathHint: 'For example references/guide.md or scripts/run.py',
+        newSkillFile: 'New file',
+        newSkillFolder: 'New folder',
+        fileContent: 'File content',
+        binaryFile: 'Binary files cannot be edited here.',
+        fileSaved: 'Saved {path}',
+        fileDeleted: 'Deleted {path}',
+        folderCreated: 'Created folder {path}',
+        confirmEntryDelete: 'Delete {path}? A folder is removed with all its contents.',
+        skillNameSpecHint: 'Lowercase letters, numbers, and single hyphens only; no leading/trailing or consecutive hyphens.',
+        skillNameHint: 'Letters, numbers, dots, underscores, and hyphens only.',
+        skillNameRequired: 'name is required.',
+        skillDescriptionRequired: 'description is required.',
+        entryPathRequired: 'A relative path is required.',
         legacySkill: 'Root SKILL.md (legacy)',
         nativeSkill: 'Project skill',
         noSkills: 'No project skills yet',
@@ -188,7 +261,6 @@ window.__ModuleLoader__.load({
         skillInstalled: 'Installed {name}',
         confirmSkillDelete: 'Delete skill {name}? Its directory is moved to the DSH trash.',
         confirmLegacyDelete: 'Delete the root SKILL.md? A backup is created first.',
-        skillNameHint: 'Letters, numbers, dots, underscores, and hyphens only.',
         libraryPath: 'Library path',
         skillCatalog: 'Skill catalog',
         catalogSubtitle: 'Sync SKILL indexes from public repositories and install into the global skill directory.',
@@ -1532,6 +1604,137 @@ window.__ModuleLoader__.load({
       .dam-mini-btn:disabled { opacity: 0.45; cursor: default; }
       .dam-mini-danger { color: var(--dsw-alias-state-error-primary); }
       .dam-mini-danger:hover:not(:disabled) { border-color: var(--dsw-alias-state-error-primary); }
+      .dam-skill-form { display: flex; flex-direction: column; gap: 10px; }
+      .dam-skill-form-hint {
+        padding: 7px 9px;
+        border: 1px solid var(--dsw-alias-border-l1);
+        border-radius: 7px;
+        color: var(--dsw-alias-label-secondary);
+        background: var(--dsw-alias-bg-layer-2);
+        font-size: 10.5px;
+        line-height: 1.5;
+      }
+      .dam-skill-field-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 10px;
+      }
+      .dam-skill-field-grid .dam-field { margin-bottom: 8px; }
+      .dam-skill-textarea {
+        min-height: 58px;
+        resize: vertical;
+        font-family: inherit;
+        line-height: 1.5;
+      }
+      .dam-skill-section {
+        padding: 8px 9px;
+        border: 1px solid var(--dsw-alias-border-l1);
+        border-radius: 8px;
+        background: var(--dsw-alias-bg-layer-2);
+      }
+      .dam-skill-section-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 3px;
+      }
+      .dam-skill-section-head strong { font-size: 11px; }
+      .dam-meta-row {
+        display: grid;
+        grid-template-columns: minmax(100px, 0.8fr) minmax(140px, 1.2fr) auto;
+        gap: 5px;
+        margin-top: 5px;
+      }
+      .dam-meta-input { min-width: 0; }
+      .dam-field-body { margin-bottom: 0; }
+      .dam-skill-body { min-height: 210px; max-height: 40vh; }
+      .dam-skill-tabs {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        border-bottom: 1px solid var(--dsw-alias-border-l1);
+        padding-bottom: 5px;
+      }
+      .dam-skill-tab {
+        min-height: 25px;
+        padding: 3px 9px;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        color: var(--dsw-alias-label-secondary);
+        background: transparent;
+        font: inherit;
+        font-size: 10.5px;
+        cursor: pointer;
+      }
+      .dam-skill-tab:hover { background: var(--dsw-alias-bg-layer-2); }
+      .dam-skill-tab-active {
+        border-color: var(--dsw-alias-border-l2);
+        color: var(--dsw-alias-label-primary);
+        background: var(--dsw-alias-bg-layer-2);
+        font-weight: 600;
+      }
+      .dam-skill-files { display: flex; flex-direction: column; gap: 8px; }
+      .dam-skill-file-create {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        padding: 6px;
+        border: 1px dashed var(--dsw-alias-border-l2);
+        border-radius: 7px;
+      }
+      .dam-skill-file-create .dam-input { flex: 1; min-width: 0; }
+      .dam-skill-file-list {
+        max-height: 190px;
+        overflow: auto;
+        border: 1px solid var(--dsw-alias-border-l1);
+        border-radius: 7px;
+        background: var(--dsw-alias-bg-layer-2);
+      }
+      .dam-skill-file-row {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        min-height: 26px;
+        padding: 2px 7px;
+        border-bottom: 1px solid var(--dsw-alias-border-l1);
+      }
+      .dam-skill-file-row:last-child { border-bottom: 0; }
+      .dam-skill-file-root { background: var(--dsw-alias-bg-layer-1); }
+      .dam-skill-file-name {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        border: 0;
+        padding: 2px 0;
+        color: var(--dsw-alias-label-primary);
+        background: transparent;
+        font: inherit;
+        font-size: 11px;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+      .dam-skill-file-name:hover { color: var(--dsw-alias-brand-primary); }
+      .dam-skill-file-meta {
+        flex: none;
+        color: var(--dsw-alias-label-secondary);
+        font-family: var(--ds-font-family-code, ui-monospace, SFMono-Regular, Menlo, monospace);
+        font-size: 9px;
+      }
+      .dam-skill-file-editor {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding-top: 3px;
+        border-top: 1px solid var(--dsw-alias-border-l1);
+      }
+      @media (max-width: 760px) {
+        .dam-skill-field-grid { grid-template-columns: 1fr; }
+        .dam-meta-row { grid-template-columns: 1fr 1fr; }
+        .dam-skill-file-create { flex-wrap: wrap; }
+      }
       .dam-catalog {
         display: flex;
         flex: 1;
@@ -1872,6 +2075,51 @@ window.__ModuleLoader__.load({
       };
     }
 
+    function emptySkillFields() {
+      return {
+        name: '',
+        description: '',
+        license: '',
+        compatibility: '',
+        allowedTools: '',
+        metadata: [],
+      };
+    }
+
+    function skillFieldsFromPayload(fields = {}) {
+      const metadata = fields.metadata && typeof fields.metadata === 'object' && !Array.isArray(fields.metadata)
+        ? Object.entries(fields.metadata).map(([key, value]) => ({ key, value: String(value ?? '') }))
+        : [];
+      return {
+        name: fields.name || '',
+        description: fields.description || '',
+        license: fields.license || '',
+        compatibility: fields.compatibility || '',
+        allowedTools: fields.allowedTools || fields['allowed-tools'] || '',
+        metadata,
+      };
+    }
+
+    function skillFieldsPayload(fields) {
+      const metadata = {};
+      for (const row of fields.metadata || []) {
+        const key = String(row.key ?? '').trim();
+        if (key) metadata[key] = String(row.value ?? '');
+      }
+      return {
+        name: fields.name.trim(),
+        description: fields.description,
+        license: fields.license,
+        compatibility: fields.compatibility,
+        allowedTools: fields.allowedTools,
+        metadata,
+      };
+    }
+
+    function sameSkillFields(left, right) {
+      return JSON.stringify(skillFieldsPayload(left)) === JSON.stringify(skillFieldsPayload(right));
+    }
+
     function SkillManagerDialog({ workspace, t, onClose, onRefresh }) {
       const [data, setData] = useState(null);
       const [loading, setLoading] = useState(true);
@@ -1882,6 +2130,16 @@ window.__ModuleLoader__.load({
       const [selected, setSelected] = useState(null);
       const [doc, setDoc] = useState(null);
       const [draft, setDraft] = useState('');
+      const [fields, setFields] = useState(emptySkillFields);
+      const [body, setBody] = useState('');
+      const [extra, setExtra] = useState([]);
+      const [original, setOriginal] = useState(null);
+      const [activeTab, setActiveTab] = useState('info');
+      const [files, setFiles] = useState(null);
+      const [filesLoading, setFilesLoading] = useState(false);
+      const [fileDoc, setFileDoc] = useState(null);
+      const [fileDraft, setFileDraft] = useState('');
+      const [entryPath, setEntryPath] = useState('');
       const [name, setName] = useState('');
       const [url, setUrl] = useState('');
       const [library, setLibrary] = useState(null);
@@ -1920,26 +2178,233 @@ window.__ModuleLoader__.load({
         }
       }
 
-      async function openSkill(skill) {
-        const legacy = skill.legacy === true;
-        setSelected({ ...skill, legacy });
-        setView('edit');
+      function resetEditor() {
+        setSelected(null);
         setDoc(null);
         setDraft('');
+        setFields(emptySkillFields());
+        setBody('');
+        setExtra([]);
+        setOriginal(null);
+        setActiveTab('info');
+        setFiles(null);
+        setFileDoc(null);
+        setFileDraft('');
+        setEntryPath('');
         setError('');
+      }
+
+      function startCreate() {
+        resetEditor();
         setNotice(null);
+        setView('create');
+      }
+
+      function isDirty() {
+        if (view === 'create') {
+          return Boolean(
+            fields.name.trim()
+            || fields.description.trim()
+            || fields.license
+            || fields.compatibility
+            || fields.allowedTools
+            || body
+            || fields.metadata.some((row) => row.key || row.value)
+          );
+        }
+        if (view !== 'edit') return false;
+        if (selected?.legacy) return Boolean(doc && draft !== doc.content);
+        return Boolean(
+          (original && (!sameSkillFields(fields, original.fields) || body !== original.body))
+          || (fileDoc && fileDraft !== fileDoc.content)
+        );
+      }
+
+      async function goList() {
+        if (isDirty() && !(await askConfirm(tr(t, 'discardConfirm')))) return;
+        resetEditor();
+        setView('list');
+      }
+
+      async function openSkill(skill) {
+        const legacy = skill.legacy === true;
+        resetEditor();
+        setSelected({ ...skill, legacy });
+        setView('edit');
         setLoading(true);
         try {
-          const result = await request('/read', {
-            method: 'POST',
-            body: JSON.stringify({ target: skillTarget(workspace, { ...skill, legacy }) }),
-          });
-          setDoc(result);
-          setDraft(result.content);
+          if (legacy) {
+            const result = await request('/read', {
+              method: 'POST',
+              body: JSON.stringify({ target: skillTarget(workspace, { ...skill, legacy }) }),
+            });
+            setDoc(result);
+            setDraft(result.content);
+          } else {
+            const result = await request('/skills/read', {
+              method: 'POST',
+              body: JSON.stringify({ workspaceId: workspace.id, name: skill.skillName }),
+            });
+            const nextFields = skillFieldsFromPayload(result.fields);
+            nextFields.name = nextFields.name || skill.skillName;
+            const nextBody = result.body || '';
+            setDoc(result);
+            setFields(nextFields);
+            setBody(nextBody);
+            setExtra(Array.isArray(result.extra) ? result.extra : []);
+            setOriginal({ fields: nextFields, body: nextBody });
+          }
         } catch (caught) {
           setError(errorText(t, caught));
         } finally {
           setLoading(false);
+        }
+      }
+
+      async function loadFiles(showLoading = true) {
+        if (showLoading) setFilesLoading(true);
+        setError('');
+        try {
+          const result = await request('/skills/files', {
+            method: 'POST',
+            body: JSON.stringify({ workspaceId: workspace.id, name: selected.skillName }),
+          });
+          setFiles(result);
+          return result;
+        } catch (caught) {
+          setError(errorText(t, caught));
+          return null;
+        } finally {
+          if (showLoading) setFilesLoading(false);
+        }
+      }
+
+      async function openFilesTab() {
+        setActiveTab('files');
+        setError('');
+        if (!files) await loadFiles();
+      }
+
+      async function readFile(entry) {
+        if (entry.type === 'directory') return;
+        if (fileDoc && fileDraft !== fileDoc.content
+          && !(await askConfirm(tr(t, 'discardConfirm')))) return;
+        setFilesLoading(true);
+        setError('');
+        try {
+          const result = await request('/skills/file/read', {
+            method: 'POST',
+            body: JSON.stringify({
+              workspaceId: workspace.id,
+              name: selected.skillName,
+              relativePath: entry.relativePath,
+            }),
+          });
+          setFileDoc(result);
+          setFileDraft(result.content || '');
+        } catch (caught) {
+          setError(errorText(t, caught));
+        } finally {
+          setFilesLoading(false);
+        }
+      }
+
+      async function saveFile() {
+        if (!fileDoc || fileDoc.binary) return;
+        setBusy(true);
+        setError('');
+        try {
+          const result = await request('/skills/file/save', {
+            method: 'POST',
+            body: JSON.stringify({
+              workspaceId: workspace.id,
+              name: selected.skillName,
+              relativePath: fileDoc.relativePath,
+              content: fileDraft,
+              expectedMtimeMs: fileDoc.mtimeMs,
+            }),
+          });
+          setFileDoc((previous) => previous ? { ...previous, ...result, content: fileDraft } : previous);
+          setNotice({ kind: 'success', text: tr(t, 'fileSaved', { path: fileDoc.relativePath }) });
+          await loadFiles(false);
+        } catch (caught) {
+          setError(errorText(t, caught));
+        } finally {
+          setBusy(false);
+        }
+      }
+
+      async function createEntry(kind) {
+        const relativePath = entryPath.trim().replaceAll('\\', '/').replace(/^\/+/, '');
+        if (!relativePath) {
+          setError(tr(t, 'entryPathRequired'));
+          return;
+        }
+        const existing = files?.entries?.find((entry) => entry.relativePath === relativePath);
+        if (existing) {
+          setError(tr(t, 'fileExists'));
+          return;
+        }
+        setBusy(true);
+        setError('');
+        try {
+          if (kind === 'folder') {
+            await request('/skills/folder/create', {
+              method: 'POST',
+              body: JSON.stringify({ workspaceId: workspace.id, name: selected.skillName, relativePath }),
+            });
+            setNotice({ kind: 'success', text: tr(t, 'folderCreated', { path: relativePath }) });
+          } else {
+            await request('/skills/file/save', {
+              method: 'POST',
+              body: JSON.stringify({
+                workspaceId: workspace.id,
+                name: selected.skillName,
+                relativePath,
+                content: '',
+                createOnly: true,
+              }),
+            });
+            setNotice({ kind: 'success', text: tr(t, 'fileSaved', { path: relativePath }) });
+          }
+          setEntryPath('');
+          const next = await loadFiles(false);
+          if (kind === 'file') {
+            const created = next?.entries?.find((entry) => entry.relativePath === relativePath);
+            if (created) await readFile(created);
+          }
+        } catch (caught) {
+          setError(errorText(t, caught));
+        } finally {
+          setBusy(false);
+        }
+      }
+
+      async function deleteEntry(entry) {
+        if (!(await askConfirm(tr(t, 'confirmEntryDelete', { path: entry.relativePath }), { danger: true }))) return;
+        setBusy(true);
+        setError('');
+        try {
+          await request('/skills/file/delete', {
+            method: 'POST',
+            body: JSON.stringify({
+              workspaceId: workspace.id,
+              name: selected.skillName,
+              relativePath: entry.relativePath,
+              recursive: entry.type === 'directory',
+            }),
+          });
+          if (fileDoc && (fileDoc.relativePath === entry.relativePath
+            || fileDoc.relativePath.startsWith(`${entry.relativePath}/`))) {
+            setFileDoc(null);
+            setFileDraft('');
+          }
+          setNotice({ kind: 'success', text: tr(t, 'fileDeleted', { path: entry.relativePath }) });
+          await loadFiles(false);
+        } catch (caught) {
+          setError(errorText(t, caught));
+        } finally {
+          setBusy(false);
         }
       }
 
@@ -1948,18 +2413,40 @@ window.__ModuleLoader__.load({
         setBusy(true);
         setError('');
         try {
-          const result = await request('/save', {
-            method: 'POST',
-            body: JSON.stringify({
-              target: skillTarget(workspace, selected),
-              content: draftRef.current,
-              expectedMtimeMs: doc.mtimeMs,
-              eol: doc.eol,
-              bom: doc.bom,
-            }),
-          });
-          setDoc((previous) => previous ? { ...previous, ...result, content: draftRef.current } : previous);
-          setNotice({ kind: 'success', text: tr(t, 'savedNotice', { path: result.path }) });
+          if (selected.legacy) {
+            const result = await request('/save', {
+              method: 'POST',
+              body: JSON.stringify({
+                target: skillTarget(workspace, selected),
+                content: draftRef.current,
+                expectedMtimeMs: doc.mtimeMs,
+                eol: doc.eol,
+                bom: doc.bom,
+              }),
+            });
+            setDoc((previous) => previous ? { ...previous, ...result, content: draftRef.current } : previous);
+            setNotice({ kind: 'success', text: tr(t, 'savedNotice', { path: result.path }) });
+          } else {
+            const result = await request('/skills/save', {
+              method: 'POST',
+              body: JSON.stringify({
+                workspaceId: workspace.id,
+                name: selected.skillName,
+                ...skillFieldsPayload(fields),
+                body,
+                extra,
+                expectedMtimeMs: doc.mtimeMs,
+                eol: doc.eol,
+                bom: doc.bom,
+              }),
+            });
+            const nextFields = skillFieldsFromPayload(result.fields);
+            setDoc((previous) => previous ? { ...previous, ...result } : previous);
+            setFields(nextFields);
+            setBody(result.body || '');
+            setOriginal({ fields: nextFields, body: result.body || '' });
+            setNotice({ kind: 'success', text: tr(t, 'savedNotice', { path: result.path }) });
+          }
           await refreshAll();
         } catch (caught) {
           setError(errorText(t, caught));
@@ -1993,9 +2480,9 @@ window.__ModuleLoader__.load({
             });
           }
           setNotice({ kind: 'success', text: tr(t, 'skillDeleted', { name: skill.skillName || 'SKILL.md' }) });
-          if (selected && (selected.legacy === skill.legacy) && selected.skillName === skill.skillName) {
+          if (selected && selected.legacy === skill.legacy && selected.skillName === skill.skillName) {
+            resetEditor();
             setView('list');
-            setSelected(null);
           }
           await refreshAll();
         } catch (caught) {
@@ -2006,16 +2493,27 @@ window.__ModuleLoader__.load({
       }
 
       async function createNew() {
-        if (!name.trim()) return;
+        if (!fields.name.trim()) {
+          setError(tr(t, 'skillNameRequired'));
+          return;
+        }
+        if (!fields.description.trim()) {
+          setError(tr(t, 'skillDescriptionRequired'));
+          return;
+        }
         setBusy(true);
         setError('');
         try {
           await request('/skills/create', {
             method: 'POST',
-            body: JSON.stringify({ workspaceId: workspace.id, name: name.trim() }),
+            body: JSON.stringify({
+              workspaceId: workspace.id,
+              ...skillFieldsPayload(fields),
+              body,
+            }),
           });
-          setNotice({ kind: 'success', text: tr(t, 'skillCreated', { name: name.trim() }) });
-          setName('');
+          setNotice({ kind: 'success', text: tr(t, 'skillCreated', { name: fields.name.trim() }) });
+          resetEditor();
           setView('list');
           await refreshAll();
         } catch (caught) {
@@ -2023,6 +2521,33 @@ window.__ModuleLoader__.load({
         } finally {
           setBusy(false);
         }
+      }
+
+      function updateField(key, value) {
+        setFields((previous) => ({ ...previous, [key]: value }));
+      }
+
+      function updateMetadata(index, key, value) {
+        setFields((previous) => ({
+          ...previous,
+          metadata: previous.metadata.map((row, rowIndex) => (
+            rowIndex === index ? { ...row, [key]: value } : row
+          )),
+        }));
+      }
+
+      function addMetadata() {
+        setFields((previous) => ({
+          ...previous,
+          metadata: [...previous.metadata, { key: '', value: '' }],
+        }));
+      }
+
+      function removeMetadata(index) {
+        setFields((previous) => ({
+          ...previous,
+          metadata: previous.metadata.filter((_, rowIndex) => rowIndex !== index),
+        }));
       }
 
       async function importFromUrl() {
@@ -2109,7 +2634,7 @@ window.__ModuleLoader__.load({
             h('button', {
               type: 'button',
               className: 'dam-btn dam-btn-primary',
-              onClick: () => { setView('create'); setName(''); setError(''); },
+              onClick: startCreate,
             }, tr(t, 'newSkill')),
             h('button', {
               type: 'button',
@@ -2140,45 +2665,225 @@ window.__ModuleLoader__.load({
             : h('div', { className: 'dam-tree-empty' }, tr(t, 'noSkills')));
       }
 
+      function renderSkillForm(isCreate) {
+        return h('div', { className: 'dam-skill-form' },
+          h('div', { className: 'dam-skill-form-hint' }, tr(t, 'skillFormHint')),
+          h('div', { className: 'dam-skill-field-grid' },
+            h('label', { className: 'dam-field' },
+              h('span', null, `${tr(t, 'skillName')} *`),
+              h('input', {
+                className: 'dam-input',
+                value: fields.name,
+                disabled: !isCreate,
+                autoFocus: isCreate,
+                onChange: (event) => updateField('name', event.target.value),
+              }),
+              h('small', { className: 'dam-help' }, isCreate ? tr(t, 'skillNameSpecHint') : tr(t, 'skillNameFixed'))),
+            h('label', { className: 'dam-field' },
+              h('span', null, `${tr(t, 'skillDescription')} *`),
+              h('textarea', {
+                className: 'dam-input dam-skill-textarea',
+                rows: 3,
+                value: fields.description,
+                onChange: (event) => updateField('description', event.target.value),
+              }),
+              h('small', { className: 'dam-help' }, tr(t, 'skillDescriptionHint'))),
+            h('label', { className: 'dam-field' },
+              h('span', null, tr(t, 'skillLicense')),
+              h('input', {
+                className: 'dam-input',
+                value: fields.license,
+                placeholder: 'MIT / Apache-2.0 / LICENSE.txt',
+                onChange: (event) => updateField('license', event.target.value),
+              })),
+            h('label', { className: 'dam-field' },
+              h('span', null, tr(t, 'skillCompatibility')),
+              h('textarea', {
+                className: 'dam-input dam-skill-textarea',
+                rows: 2,
+                value: fields.compatibility,
+                onChange: (event) => updateField('compatibility', event.target.value),
+              }),
+              h('small', { className: 'dam-help' }, tr(t, 'skillCompatibilityHint'))),
+            h('label', { className: 'dam-field' },
+              h('span', null, tr(t, 'skillAllowedTools')),
+              h('input', {
+                className: 'dam-input',
+                value: fields.allowedTools,
+                placeholder: 'Bash(git:*) Read',
+                onChange: (event) => updateField('allowedTools', event.target.value),
+              }),
+              h('small', { className: 'dam-help' }, tr(t, 'skillAllowedToolsHint')))),
+          h('div', { className: 'dam-skill-section' },
+            h('div', { className: 'dam-skill-section-head' },
+              h('strong', null, tr(t, 'skillMetadata')),
+              h('button', { type: 'button', className: 'dam-mini-btn', onClick: addMetadata, disabled: busy }, tr(t, 'addMetadata'))),
+            h('div', { className: 'dam-skill-hint' }, tr(t, 'metadataHint')),
+            fields.metadata.length
+              ? fields.metadata.map((row, index) => h('div', { className: 'dam-meta-row', key: `metadata-${index}` },
+                h('input', {
+                  className: 'dam-input dam-meta-input',
+                  value: row.key,
+                  placeholder: tr(t, 'metadataKey'),
+                  onChange: (event) => updateMetadata(index, 'key', event.target.value),
+                }),
+                h('input', {
+                  className: 'dam-input dam-meta-input',
+                  value: row.value,
+                  placeholder: tr(t, 'metadataValue'),
+                  onChange: (event) => updateMetadata(index, 'value', event.target.value),
+                }),
+                h('button', {
+                  type: 'button',
+                  className: 'dam-mini-btn dam-mini-danger',
+                  onClick: () => removeMetadata(index),
+                  disabled: busy,
+                }, tr(t, 'remove'))))
+              : null),
+          h('label', { className: 'dam-field dam-field-body' },
+            h('span', null, tr(t, 'skillBody')),
+            h('textarea', {
+              className: 'dam-dialog-textarea dam-skill-body',
+              value: body,
+              spellCheck: false,
+              placeholder: '# Instructions\n\nDescribe the workflow, examples, and edge cases.',
+              onChange: (event) => setBody(event.target.value),
+              onKeyDown: (event) => {
+                if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {
+                  event.preventDefault();
+                  if (!busy) {
+                    if (isCreate) void createNew();
+                    else void saveSelected();
+                  }
+                }
+              },
+            }),
+            h('small', { className: 'dam-help' }, tr(t, 'skillBodyHint'))));
+      }
+
+      function renderFiles() {
+        if (filesLoading && !files) return h('div', { className: 'dam-loading' }, tr(t, 'loading'));
+        const entries = files?.entries || [];
+        return h('div', { className: 'dam-skill-files' },
+          h('div', { className: 'dam-skill-hint' }, tr(t, 'skillFilesHint')),
+          h('div', { className: 'dam-skill-file-create' },
+            h('input', {
+              className: 'dam-input',
+              value: entryPath,
+              placeholder: tr(t, 'entryPathHint'),
+              onChange: (event) => setEntryPath(event.target.value),
+            }),
+            h('button', { type: 'button', className: 'dam-btn', onClick: () => createEntry('folder'), disabled: busy }, tr(t, 'newSkillFolder')),
+            h('button', { type: 'button', className: 'dam-btn dam-btn-primary', onClick: () => createEntry('file'), disabled: busy }, tr(t, 'newSkillFile'))),
+          h('div', { className: 'dam-skill-file-list' },
+            h('div', { className: 'dam-skill-file-row dam-skill-file-root' },
+              h('button', {
+                type: 'button',
+                className: 'dam-skill-file-name',
+                onClick: () => setActiveTab('info'),
+              }, tr(t, 'rootSkill')),
+              h('span', { className: 'dam-skill-file-meta' }, 'SKILL.md')),
+            entries.length
+              ? entries.map((entry) => h('div', {
+                className: 'dam-skill-file-row',
+                key: entry.relativePath,
+                style: { paddingLeft: `${8 + (entry.relativePath.split('/').length - 1) * 14}px` },
+              },
+              entry.type === 'file'
+                ? h('button', { type: 'button', className: 'dam-skill-file-name', onClick: () => readFile(entry) }, entry.name)
+                : h('span', { className: 'dam-skill-file-name' }, `▸ ${entry.name}`),
+              h('span', { className: 'dam-skill-file-meta' }, entry.type === 'file' ? `${entry.size} B` : ''),
+              h('button', {
+                type: 'button',
+                className: 'dam-mini-btn dam-mini-danger',
+                onClick: () => deleteEntry(entry),
+                disabled: busy,
+              }, tr(t, 'delete'))))
+              : h('div', { className: 'dam-skill-hint' }, tr(t, 'skillFilesEmpty'))),
+          fileDoc ? h('div', { className: 'dam-skill-file-editor' },
+            h('div', { className: 'dam-dialog-path' }, fileDoc.relativePath),
+            fileDoc.binary
+              ? h('div', { className: 'dam-skill-hint' }, tr(t, 'binaryFile'))
+              : h('textarea', {
+                className: 'dam-dialog-textarea dam-skill-body',
+                value: fileDraft,
+                spellCheck: false,
+                onChange: (event) => setFileDraft(event.target.value),
+                onKeyDown: (event) => {
+                  if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {
+                    event.preventDefault();
+                    if (!busy) void saveFile();
+                  }
+                },
+              }),
+            h('div', { className: 'dam-skill-toolbar' },
+              h('button', { type: 'button', className: 'dam-btn', onClick: () => { setFileDoc(null); setFileDraft(''); } }, tr(t, 'close')),
+              h('button', { type: 'button', className: 'dam-btn dam-btn-primary', onClick: saveFile, disabled: busy || fileDoc.binary }, busy ? tr(t, 'saving') : tr(t, 'save'))))
+            : null);
+      }
+
       function renderEditor() {
         if (loading) return h('div', { className: 'dam-loading' }, tr(t, 'loading'));
         if (!selected || !doc) return h('div', { className: 'dam-tree-empty' }, error || tr(t, 'noSkills'));
+        if (selected.legacy) {
+          return h('div', { className: 'dam-skill-panel' },
+            h('div', { className: 'dam-dialog-path', title: doc.path }, doc.path),
+            h('div', { className: 'dam-dialog-meta' },
+              h('span', { className: 'dam-dialog-status-missing' }, tr(t, 'legacySkill')),
+              doc.exists ? h('span', null, tr(t, 'modified', { time: formatTime(doc.modifiedAt) })) : h('span', null, tr(t, 'missing'))),
+            h('textarea', {
+              className: 'dam-dialog-textarea',
+              value: draft,
+              spellCheck: false,
+              placeholder: tr(t, 'filePlaceholder', { file: 'SKILL.md' }),
+              'aria-label': tr(t, 'filePlaceholder', { file: 'SKILL.md' }),
+              onChange: (event) => setDraft(event.target.value),
+              onKeyDown: (event) => {
+                if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {
+                  event.preventDefault();
+                  if (!busy) void saveSelected();
+                }
+              },
+            }),
+            h('div', { className: 'dam-skill-toolbar' },
+              h('button', { type: 'button', className: 'dam-btn', onClick: goList }, tr(t, 'back')),
+              h('button', { type: 'button', className: 'dam-btn dam-btn-danger', onClick: () => removeSkill(selected), disabled: busy }, tr(t, 'delete')),
+              h('button', { type: 'button', className: 'dam-btn dam-btn-primary', onClick: saveSelected, disabled: busy }, busy ? tr(t, 'saving') : tr(t, 'save'))));
+        }
         return h('div', { className: 'dam-skill-panel' },
           h('div', { className: 'dam-dialog-path', title: doc.path }, doc.path),
           h('div', { className: 'dam-dialog-meta' },
-            h('span', { className: selected.legacy ? 'dam-dialog-status-missing' : 'dam-dialog-status-ready' },
-              selected.legacy ? tr(t, 'legacySkill') : selected.skillName),
+            h('span', { className: 'dam-dialog-status-ready' }, selected.skillName),
             doc.exists ? h('span', null, tr(t, 'modified', { time: formatTime(doc.modifiedAt) })) : h('span', null, tr(t, 'missing'))),
-          h('textarea', {
-            className: 'dam-dialog-textarea',
-            value: draft,
-            spellCheck: false,
-            placeholder: tr(t, 'filePlaceholder', { file: 'SKILL.md' }),
-            'aria-label': tr(t, 'filePlaceholder', { file: 'SKILL.md' }),
-            onChange: (event) => setDraft(event.target.value),
-            onKeyDown: (event) => {
-              if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {
-                event.preventDefault();
-                if (!busy) void saveSelected();
-              }
-            },
-          }),
+          h('div', { className: 'dam-skill-tabs' },
+            h('button', {
+              type: 'button',
+              className: `dam-skill-tab${activeTab === 'info' ? ' dam-skill-tab-active' : ''}`,
+              onClick: () => setActiveTab('info'),
+            }, tr(t, 'skillTabInfo')),
+            h('button', {
+              type: 'button',
+              className: `dam-skill-tab${activeTab === 'files' ? ' dam-skill-tab-active' : ''}`,
+              onClick: openFilesTab,
+            }, tr(t, 'skillTabFiles'))),
+          activeTab === 'files' ? renderFiles() : renderSkillForm(false),
           h('div', { className: 'dam-skill-toolbar' },
-            h('button', { type: 'button', className: 'dam-btn', onClick: () => { setView('list'); setSelected(null); setDoc(null); setError(''); } }, tr(t, 'back')),
+            h('button', { type: 'button', className: 'dam-btn', onClick: goList }, tr(t, 'back')),
             h('button', { type: 'button', className: 'dam-btn dam-btn-danger', onClick: () => removeSkill(selected), disabled: busy }, tr(t, 'delete')),
             h('button', { type: 'button', className: 'dam-btn dam-btn-primary', onClick: saveSelected, disabled: busy }, busy ? tr(t, 'saving') : tr(t, 'save'))));
       }
 
       function renderCreate() {
         return h('div', { className: 'dam-skill-panel' },
-          h('div', { className: 'dam-skill-hint' }, tr(t, 'skillManagerHint')),
-          h('label', { className: 'dam-field' },
-            h('span', null, tr(t, 'skillName')),
-            h('input', { className: 'dam-input', value: name, autoFocus: true, onChange: (event) => setName(event.target.value) })),
-          h('p', { className: 'dam-help' }, tr(t, 'skillNameHint')),
+          renderSkillForm(true),
           h('div', { className: 'dam-skill-toolbar' },
-            h('button', { type: 'button', className: 'dam-btn', onClick: () => setView('list') }, tr(t, 'back')),
-            h('button', { type: 'button', className: 'dam-btn dam-btn-primary', onClick: createNew, disabled: busy || !name.trim() }, tr(t, 'createSkill'))));
+            h('button', { type: 'button', className: 'dam-btn', onClick: goList }, tr(t, 'back')),
+            h('button', {
+              type: 'button',
+              className: 'dam-btn dam-btn-primary',
+              onClick: createNew,
+              disabled: busy || !fields.name.trim() || !fields.description.trim(),
+            }, busy ? tr(t, 'saving') : tr(t, 'createSkill'))));
       }
 
       function renderImport() {
@@ -2213,17 +2918,16 @@ window.__ModuleLoader__.load({
       }
 
       async function requestClose() {
-        if (view === 'edit' && selected && doc && draft !== doc.content
-          && !(await askConfirm(tr(t, 'discardConfirm')))) return;
+        if (isDirty() && !(await askConfirm(tr(t, 'discardConfirm')))) return;
         onClose();
       }
 
-      let body;
-      if (view === 'edit') body = renderEditor();
-      else if (view === 'create') body = renderCreate();
-      else if (view === 'import') body = renderImport();
-      else if (view === 'library') body = renderLibrary();
-      else body = renderList();
+      let bodyContent;
+      if (view === 'edit') bodyContent = renderEditor();
+      else if (view === 'create') bodyContent = renderCreate();
+      else if (view === 'import') bodyContent = renderImport();
+      else if (view === 'library') bodyContent = renderLibrary();
+      else bodyContent = renderList();
       const count = data?.count ?? 0;
 
       return h(React.Fragment, null,
@@ -2239,10 +2943,9 @@ window.__ModuleLoader__.load({
         h('div', { className: 'dam-skill-panel' },
           error ? h('div', { className: 'dam-dialog-notice dam-dialog-notice-error', role: 'alert' }, error) : null,
           notice ? h('div', { className: 'dam-dialog-notice dam-dialog-notice-success', role: 'status' }, notice.text) : null,
-          body)),
+          bodyContent)),
         confirmElement);
     }
-
     function FileDialog({ workspace, kind, t, onClose, onSaved }) {
       const fileName = kind === 'skill' ? 'SKILL.md' : 'AGENTS.md';
       const target = { scope: 'workspace', workspaceId: workspace.id, file: kind };
