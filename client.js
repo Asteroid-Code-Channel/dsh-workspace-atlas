@@ -11,8 +11,8 @@ window.__ModuleLoader__.load({
 
     const DICT = {
       zh: {
-        title: '工作区图谱',
-        subtitle: 'AGENTS / SKILL 与工作区树',
+        title: 'AGENTS & Skills 工作台',
+        subtitle: '全局/工作区 AGENTS.md、多 SKILL 管理与四源技能目录',
         listView: '列表',
         treeView: '树形',
         treeSearch: '搜索工作区…',
@@ -148,8 +148,8 @@ window.__ModuleLoader__.load({
         allFiles: '全部文件',
       },
       en: {
-        title: 'Workspace Atlas',
-        subtitle: 'AGENTS / SKILL and the workspace tree',
+        title: 'AGENTS & Skills Studio',
+        subtitle: 'Global/workspace AGENTS.md, multi-skill management, and four-source skill catalogs',
         listView: 'List',
         treeView: 'Tree',
         treeSearch: 'Search workspaces…',

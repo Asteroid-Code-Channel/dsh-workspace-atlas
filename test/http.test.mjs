@@ -6,6 +6,7 @@ import { Readable } from 'node:stream';
 const base = path.join(process.cwd(), '.tmp-agents-manager-http-test');
 const home = path.join(base, 'home');
 const workspace = path.join(base, 'workspace');
+const pkg = JSON.parse(await fs.readFile(path.join(process.cwd(), 'package.json'), 'utf8'));
 await fs.rm(base, { recursive: true, force: true });
 await fs.mkdir(workspace, { recursive: true });
 
@@ -74,12 +75,12 @@ assert.equal(state.payload.data.home, home);
 assert.equal(state.payload.data.global.path, path.join(home, 'AGENTS.md'));
 assert.equal(state.payload.data.workspaces.length, 1);
 assert.equal(state.payload.data.workspaces[0].files[0].relativePath, 'AGENTS.md');
-assert.equal(state.payload.data.version, '0.2.0');
+assert.equal(state.payload.data.version, pkg.version);
 
 const update = await invoke('/api/dsh-agents-manager/update');
 assert.equal(update.status, 200);
-assert.equal(update.payload.data.configured, false);
-assert.equal(update.payload.data.currentVersion, '0.2.0');
+assert.equal(update.payload.data.configured, true);
+assert.equal(update.payload.data.currentVersion, pkg.version);
 assert.equal(update.payload.data.canAutoUpdate, false);
 
 const readGlobal = await invoke('/api/dsh-agents-manager/read', { body: { target: { scope: 'global' } } });

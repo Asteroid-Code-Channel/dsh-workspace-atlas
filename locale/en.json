@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Workspace Atlas",
-    "description": "Browse workspaces as a list or a left-to-right tree, and edit the global AGENTS.md plus each workspace's AGENTS.md / SKILL.md."
+    "title": "AGENTS & Skills Studio",
+    "description": "Edit global and workspace AGENTS.md, manage multiple SKILL.md files, and install skills from Anthropic, OpenAI, Cursor, and Matt Pocock catalogs."
   }
 }

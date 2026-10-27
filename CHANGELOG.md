@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+
+- Rename the display name to AGENTS & Skills Studio / AGENTS & Skills 工作台.
+- Rewrite the README, package description, locale metadata, and marketplace copy around AGENTS.md, multi-SKILL management, and the four skill sources.
+- Add marketplace screenshots and a `screenshots.json` manifest.
+
 ## 0.2.0
 
 - Rename the project to Workspace Atlas / 工作区图谱.

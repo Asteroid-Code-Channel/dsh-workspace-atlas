@@ -1,18 +1,34 @@
-# Workspace Atlas
+# AGENTS & Skills Studio
 
 <p align="center">
-  <img src="icon.svg" width="96" height="96" alt="Workspace Atlas icon">
+  <img src="icon.svg" width="96" height="96" alt="AGENTS & Skills Studio icon">
 </p>
 
 <p align="center">
-  A workspace map, AGENTS editor, and multi-source skill catalog for DeepSeek Harness / DSH NEXT.
+  AGENTS & Skills 工作台 · edit AGENTS.md, manage multiple skills, and install from four public skill catalogs.
 </p>
 
-Workspace Atlas adds a full-page panel to the DSH Web UI for browsing registered workspaces and editing the global and workspace-level instruction files they contain.
+AGENTS & Skills Studio is a full-page panel for DeepSeek Harness / DSH NEXT. It manages both kinds of workspace instruction files:
+
+- global and workspace-root `AGENTS.md`
+- multiple project skills at `<workspace>/.dsh/skills/<name>/SKILL.md`
+- the global skill directory at `$DSH_HOME/skills`
+- local skill library, URL import, and whole-directory installs from four public catalogs
+
+Four skill sources:
+
+| Source | Repository |
+|---|---|
+| Anthropic | `anthropics/skills` |
+| OpenAI | `openai/skills` |
+| Cursor | `cursor/plugins` |
+| Matt Pocock | `mattpocock/skills` |
+
+It also provides list and left-to-right tree views, tree search, SKILL counts, backups, conflict detection, and path-escape protection.
 
 > This is a community plugin. It is not an official DeepSeek product.
 
-> 中文简介：工作区图谱是 DSH 的工作区关系图与根文件编辑器。列表视图按名称平铺工作区，只显示根 `AGENTS.md` 和 SKILL 汇总；树形视图按路径生成从左向右的森林。每个节点的 `SKILL` 按钮显示技能数量，点击进入技能管理器，支持 `.dsh/skills/<name>/SKILL.md` 的增删改、URL 导入和本地技能仓库。支持搜索定位、展开动画、备份、冲突检测和路径逃逸防护。
+> 中文简介：AGENTS & Skills 工作台是一个 DSH 全页面插件，用来管理全局与工作区根 `AGENTS.md`、多个 `.dsh/skills/<name>/SKILL.md` 和全局技能目录。支持列表/横向树视图、搜索定位、SKILL 数量统计、新建/编辑/删除、URL 导入、本地技能仓库，以及从 Anthropic（`anthropics/skills`）、OpenAI（`openai/skills`）、Cursor（`cursor/plugins`）、Matt Pocock（`mattpocock/skills`）四源技能目录整目录安装。包含备份、外部修改冲突检测和路径逃逸防护。
 
 ## Features
 
@@ -102,7 +118,7 @@ For a different desktop UI, repeat the installation in that profile.
 
 ## Usage
 
-1. Open the sidebar entry named **Workspace Atlas / 工作区图谱**.
+1. Open the sidebar entry named **AGENTS & Skills Studio / AGENTS & Skills 工作台**.
 2. Choose **List / 列表** for a flat alphabetical overview.
 3. Choose **Tree / 树形** for the workspace forest.
 4. Click a node card to expand it.
@@ -196,7 +212,7 @@ The tests use temporary directories inside the workspace and do not write to the
 
 - The global/workspace `AGENTS.md` files affect the model only when `@deepseek-ai/dsh-agent-instructions` (or the active profile's equivalent loader) is enabled. In the tested desktop profile that row was disabled.
 - Editing files does not rewrite history already injected into an open Session.
-- Workspace Atlas manages `.dsh/skills` directories directly but is not a full skill marketplace: no GitHub repository tree browsing, dependency resolution, enable/disable policy, or instruction budgets.
+- AGENTS & Skills Studio manages `.dsh/skills` directories directly and installs whole skill directories from four curated catalogs; it is not a general GitHub tree browser, dependency resolver, or enable/disable policy engine.
 - URL import downloads a single `SKILL.md` only; auxiliary files must be added manually.
 - Legacy root `SKILL.md` remains supported for backward compatibility but is not a DSH-native project skill.
 

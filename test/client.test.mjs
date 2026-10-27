@@ -73,7 +73,7 @@ const sidebar = registrations.find((entry) => entry.options.name === 'sidebar.pa
 assert.equal(main.options.key, 'agents-manager');
 assert.equal(sidebar.options.id, 'agents-manager');
 assert.equal(typeof sidebar.options.label, 'function');
-assert.equal(sidebar.options.label(), '工作区图谱');
+assert.equal(sidebar.options.label(), 'AGENTS & Skills 工作台');
 
 const iconElement = sidebar.component({ size: 18, active: true });
 const icon = iconElement.type(iconElement.props);
@@ -98,7 +98,7 @@ const elements = collect(page.children);
 const root = elements.find((child) => child.props.className === 'dam-root');
 assert(root, 'page renders root');
 const title = elements.find((child) => child.props.className === 'dam-title');
-assert.equal(title.children[0], '工作区图谱');
+assert.equal(title.children[0], 'AGENTS & Skills 工作台');
 
 const target = { scope: 'workspace', workspaceId: 'ws-1', relativePath: 'AGENTS.md' };
 const doc = {

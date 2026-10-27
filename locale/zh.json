@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "工作区图谱",
-    "description": "用列表或横向树查看工作区，编辑全局 AGENTS.md 及各工作区的 AGENTS.md / SKILL.md。"
+    "title": "AGENTS & Skills 工作台",
+    "description": "编辑全局与工作区 AGENTS.md，管理多个 SKILL.md，并从 Anthropic、OpenAI、Cursor、Matt Pocock 四源技能目录安装技能。"
   }
 }
