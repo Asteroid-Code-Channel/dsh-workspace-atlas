@@ -74,6 +74,19 @@ assert.equal(saved.fields.license, 'Apache-2.0');
 assert.equal(saved.fields.metadata.version, '2.0');
 assert.equal(saved.body, '# Updated\n');
 
+await store.saveSkill('ws-skill', 'pdf-tools', {
+  description: 'Extract PDF text and fill forms.',
+  license: 'Apache-2.0',
+  compatibility: 'Requires Python',
+  metadata: { version: '2.0' },
+  allowedTools: 'Read Bash',
+  body: '# Updated\n',
+  extra: ["when_to_use: 'Use for PDFs.'"],
+  expectedMtimeMs: saved.mtimeMs,
+});
+const withExtraSaved = await fs.readFile(path.join(workspace, '.dsh', 'skills', 'pdf-tools', 'SKILL.md'), 'utf8');
+assert.match(withExtraSaved, /when_to_use: 'Use for PDFs\.'/);
+
 await store.createSkillFolder('ws-skill', 'pdf-tools', 'references');
 await store.saveSkillFile('ws-skill', 'pdf-tools', 'references/guide.md', '# Guide\n', null);
 await assert.rejects(
