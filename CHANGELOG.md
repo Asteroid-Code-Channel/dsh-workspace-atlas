@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1
+
+- Stack all skill form fields vertically.
+- Show English field names in parentheses and mark required fields with a red asterisk.
+
 ## 0.3.0
 
 - Add a structured Agent Skills create form with `name`, `description`, `license`, `compatibility`, `metadata`, `allowed-tools`, and Markdown body.

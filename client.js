@@ -1616,8 +1616,8 @@ window.__ModuleLoader__.load({
       }
       .dam-skill-field-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0 10px;
+        grid-template-columns: 1fr;
+        gap: 0;
       }
       .dam-skill-field-grid .dam-field { margin-bottom: 8px; }
       .dam-skill-textarea {
@@ -1640,6 +1640,7 @@ window.__ModuleLoader__.load({
         margin-bottom: 3px;
       }
       .dam-skill-section-head strong { font-size: 11px; }
+      .dam-required-star { color: var(--dsw-alias-state-error-primary); }
       .dam-meta-row {
         display: grid;
         grid-template-columns: minmax(100px, 0.8fr) minmax(140px, 1.2fr) auto;
@@ -2670,7 +2671,7 @@ window.__ModuleLoader__.load({
           h('div', { className: 'dam-skill-form-hint' }, tr(t, 'skillFormHint')),
           h('div', { className: 'dam-skill-field-grid' },
             h('label', { className: 'dam-field' },
-              h('span', null, `${tr(t, 'skillName')} *`),
+              h('span', null, `${tr(t, 'skillName')} (name)`, h('span', { className: 'dam-required-star' }, ' *')),
               h('input', {
                 className: 'dam-input',
                 value: fields.name,
@@ -2680,7 +2681,7 @@ window.__ModuleLoader__.load({
               }),
               h('small', { className: 'dam-help' }, isCreate ? tr(t, 'skillNameSpecHint') : tr(t, 'skillNameFixed'))),
             h('label', { className: 'dam-field' },
-              h('span', null, `${tr(t, 'skillDescription')} *`),
+              h('span', null, `${tr(t, 'skillDescription')} (description)`, h('span', { className: 'dam-required-star' }, ' *')),
               h('textarea', {
                 className: 'dam-input dam-skill-textarea',
                 rows: 3,
@@ -2689,7 +2690,7 @@ window.__ModuleLoader__.load({
               }),
               h('small', { className: 'dam-help' }, tr(t, 'skillDescriptionHint'))),
             h('label', { className: 'dam-field' },
-              h('span', null, tr(t, 'skillLicense')),
+              h('span', null, `${tr(t, 'skillLicense')} (license)`),
               h('input', {
                 className: 'dam-input',
                 value: fields.license,
@@ -2697,26 +2698,17 @@ window.__ModuleLoader__.load({
                 onChange: (event) => updateField('license', event.target.value),
               })),
             h('label', { className: 'dam-field' },
-              h('span', null, tr(t, 'skillCompatibility')),
+              h('span', null, `${tr(t, 'skillCompatibility')} (compatibility)`),
               h('textarea', {
                 className: 'dam-input dam-skill-textarea',
                 rows: 2,
                 value: fields.compatibility,
                 onChange: (event) => updateField('compatibility', event.target.value),
               }),
-              h('small', { className: 'dam-help' }, tr(t, 'skillCompatibilityHint'))),
-            h('label', { className: 'dam-field' },
-              h('span', null, tr(t, 'skillAllowedTools')),
-              h('input', {
-                className: 'dam-input',
-                value: fields.allowedTools,
-                placeholder: 'Bash(git:*) Read',
-                onChange: (event) => updateField('allowedTools', event.target.value),
-              }),
-              h('small', { className: 'dam-help' }, tr(t, 'skillAllowedToolsHint')))),
+              h('small', { className: 'dam-help' }, tr(t, 'skillCompatibilityHint')))),
           h('div', { className: 'dam-skill-section' },
             h('div', { className: 'dam-skill-section-head' },
-              h('strong', null, tr(t, 'skillMetadata')),
+              h('strong', null, `${tr(t, 'skillMetadata')} (metadata)`),
               h('button', { type: 'button', className: 'dam-mini-btn', onClick: addMetadata, disabled: busy }, tr(t, 'addMetadata'))),
             h('div', { className: 'dam-skill-hint' }, tr(t, 'metadataHint')),
             fields.metadata.length
@@ -2740,8 +2732,17 @@ window.__ModuleLoader__.load({
                   disabled: busy,
                 }, tr(t, 'remove'))))
               : null),
+          h('label', { className: 'dam-field' },
+            h('span', null, `${tr(t, 'skillAllowedTools')} (allowed-tools)`),
+            h('input', {
+              className: 'dam-input',
+              value: fields.allowedTools,
+              placeholder: 'Bash(git:*) Read',
+              onChange: (event) => updateField('allowedTools', event.target.value),
+            }),
+            h('small', { className: 'dam-help' }, tr(t, 'skillAllowedToolsHint'))),
           h('label', { className: 'dam-field dam-field-body' },
-            h('span', null, tr(t, 'skillBody')),
+            h('span', null, `${tr(t, 'skillBody')} (body)`),
             h('textarea', {
               className: 'dam-dialog-textarea dam-skill-body',
               value: body,
