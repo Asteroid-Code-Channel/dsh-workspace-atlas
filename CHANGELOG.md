@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2
+
+- Allow editing an existing skill name; saving renames the parent folder and moves all child files.
+- Allow saving an existing non-spec skill name without a validation error.
+- Make the skill form hint pale yellow.
+
 ## 0.3.1
 
 - Stack all skill form fields vertically.

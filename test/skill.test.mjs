@@ -87,6 +87,35 @@ await store.saveSkill('ws-skill', 'pdf-tools', {
 const withExtraSaved = await fs.readFile(path.join(workspace, '.dsh', 'skills', 'pdf-tools', 'SKILL.md'), 'utf8');
 assert.match(withExtraSaved, /when_to_use: 'Use for PDFs\.'/);
 
+await store.createSkill('ws-skill', 'legacy_name', 'legacy raw');
+const legacySaved = await store.saveSkill('ws-skill', 'legacy_name', {
+  name: 'legacy_name',
+  description: 'Legacy skill kept under its existing name.',
+  body: '# Legacy\n',
+  expectedMtimeMs: (await store.readSkill('ws-skill', 'legacy_name')).mtimeMs,
+});
+assert.equal(legacySaved.skillName, 'legacy_name');
+assert.equal(legacySaved.renamed, false);
+
+await store.createSkill('ws-skill', 'rename-me', {
+  name: 'rename-me',
+  description: 'Rename test.',
+  body: '# Rename\n',
+});
+await store.createSkillFolder('ws-skill', 'rename-me', 'references');
+await store.saveSkillFile('ws-skill', 'rename-me', 'references/moved.md', '# Moved\n', null);
+const renamed = await store.saveSkill('ws-skill', 'rename-me', {
+  name: 'renamed-skill',
+  description: 'Rename test.',
+  body: '# Rename\n',
+  expectedMtimeMs: (await store.readSkill('ws-skill', 'rename-me')).mtimeMs,
+});
+assert.equal(renamed.skillName, 'renamed-skill');
+assert.equal(renamed.renamed, true);
+assert.equal((await store.readSkill('ws-skill', 'renamed-skill')).fields.name, 'renamed-skill');
+assert.equal((await store.readSkillFile('ws-skill', 'renamed-skill', 'references/moved.md')).content, '# Moved\n');
+assert.equal(await fs.stat(path.join(workspace, '.dsh', 'skills', 'rename-me')).catch(() => null), null);
+
 await store.createSkillFolder('ws-skill', 'pdf-tools', 'references');
 await store.saveSkillFile('ws-skill', 'pdf-tools', 'references/guide.md', '# Guide\n', null);
 await assert.rejects(

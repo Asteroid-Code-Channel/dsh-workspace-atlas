@@ -1,6 +1,6 @@
 {
   "name": "dsh-workspace-atlas",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "AGENTS & Skills Studio — edit AGENTS.md, create spec-compliant SKILL.md files with structured frontmatter, manage skill folders, and install from Anthropic, OpenAI, Cursor, and Matt Pocock catalogs in DSH.",
   "license": "MIT",
   "author": "Asteroid-Code-Channel",

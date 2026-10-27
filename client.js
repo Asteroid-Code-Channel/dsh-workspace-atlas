@@ -69,6 +69,7 @@ window.__ModuleLoader__.load({
         folderCreated: '已创建目录 {path}',
         confirmEntryDelete: '确定删除 {path}？文件夹会连同内容一起删除。',
         skillNameSpecHint: '仅小写字母、数字和连字符；不能以连字符开头或结尾，不能连续两个连字符。',
+        skillNameEditHint: '修改名称并保存时，技能父文件夹会同步重命名，子文件一起移动；新名称需符合规范。已有非规范名称可保持不变。',
         skillNameHint: '仅字母、数字、点、下划线和连字符。',
         skillNameRequired: '请填写 name。',
         skillDescriptionRequired: '请填写 description。',
@@ -242,6 +243,7 @@ window.__ModuleLoader__.load({
         folderCreated: 'Created folder {path}',
         confirmEntryDelete: 'Delete {path}? A folder is removed with all its contents.',
         skillNameSpecHint: 'Lowercase letters, numbers, and single hyphens only; no leading/trailing or consecutive hyphens.',
+        skillNameEditHint: 'Saving a new name renames the skill parent folder and moves all child files. The new name must follow the spec; existing non-spec names may be kept.',
         skillNameHint: 'Letters, numbers, dots, underscores, and hyphens only.',
         skillNameRequired: 'name is required.',
         skillDescriptionRequired: 'description is required.',
@@ -1607,10 +1609,10 @@ window.__ModuleLoader__.load({
       .dam-skill-form { display: flex; flex-direction: column; gap: 10px; }
       .dam-skill-form-hint {
         padding: 7px 9px;
-        border: 1px solid var(--dsw-alias-border-l1);
+        border: 1px solid color-mix(in srgb, #f2c94c 32%, var(--dsw-alias-border-l1));
         border-radius: 7px;
-        color: var(--dsw-alias-label-secondary);
-        background: var(--dsw-alias-bg-layer-2);
+        color: var(--dsw-alias-label-primary);
+        background: color-mix(in srgb, #f2c94c 12%, var(--dsw-alias-bg-layer-2));
         font-size: 10.5px;
         line-height: 1.5;
       }
@@ -2432,8 +2434,8 @@ window.__ModuleLoader__.load({
               method: 'POST',
               body: JSON.stringify({
                 workspaceId: workspace.id,
-                name: selected.skillName,
                 ...skillFieldsPayload(fields),
+                name: fields.name.trim() || selected.skillName,
                 body,
                 extra,
                 expectedMtimeMs: doc.mtimeMs,
@@ -2446,6 +2448,9 @@ window.__ModuleLoader__.load({
             setFields(nextFields);
             setBody(result.body || '');
             setOriginal({ fields: nextFields, body: result.body || '' });
+            if (result.skillName) {
+              setSelected((previous) => previous ? { ...previous, skillName: result.skillName, path: result.path || previous.path } : previous);
+            }
             setNotice({ kind: 'success', text: tr(t, 'savedNotice', { path: result.path }) });
           }
           await refreshAll();
@@ -2675,11 +2680,11 @@ window.__ModuleLoader__.load({
               h('input', {
                 className: 'dam-input',
                 value: fields.name,
-                disabled: !isCreate,
+                disabled: false,
                 autoFocus: isCreate,
                 onChange: (event) => updateField('name', event.target.value),
               }),
-              h('small', { className: 'dam-help' }, isCreate ? tr(t, 'skillNameSpecHint') : tr(t, 'skillNameFixed'))),
+              h('small', { className: 'dam-help' }, isCreate ? tr(t, 'skillNameSpecHint') : tr(t, 'skillNameEditHint'))),
             h('label', { className: 'dam-field' },
               h('span', null, `${tr(t, 'skillDescription')} (description)`, h('span', { className: 'dam-required-star' }, ' *')),
               h('textarea', {
